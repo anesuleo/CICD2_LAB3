@@ -45,5 +45,3 @@ def delete_user(user_id: int):
             users.pop(i)
             return
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="user not found")
-
-    
