@@ -7,10 +7,12 @@ users: list[User] = []
 @app.get("/health")
 def get_health():
     return {"status": "ok"}
+
 #return all users 
 @app.get("/api/users")
 def get_users():
     return users
+
 #Get user by id
 @app.get("/api/users/{user_id}")
 def get_user(user_id: int):
@@ -36,12 +38,12 @@ def update_user(user_id: int, user: User):
             return user
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
-@app.delete("/api/users/{user_id}", status_code=status.HTTP_204_NO_CONTENT) 
-def delete_user(user_id: int): #Find user by idd
-    for u in users:
-        if u.user_id == user_id: #If ID exists, User with ID is dleted 
-            users.remove(u)
-            return    
-    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+@app.delete("/api/users/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_user(user_id: int):
+    for i,e in enumerate(users):
+        if e.user_id == user_id:
+            users.pop(i)
+            return
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="user not found")
 
     
